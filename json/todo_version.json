@@ -1,8 +1,8 @@
 {
-    "version_name":"v1.1.0",
-    "version_code":15,
-    "update_info":"1. 界面和一些操作优化调整\n2. 添加可重新编辑和优先级功能",
+    "version_name":"v1.1.1",
+    "version_code":16,
+    "update_info":"1. 登陆后刷新列表\n2. 新增登录和长按引导提示\n3. 当条目达到12行右下角按钮才有动效",
     "file_size":"3M",
     "constraint":false,
-    "apk_url":"https://github.com/xujiaji/Todo/releases/download/v1.1.0/wantodo_v1.1.0_2018-12-03.11-01.apk"
+    "apk_url":"https://github.com/xujiaji/Todo/releases/download/v1.1.1/wantodo_v1.1.1_2018-12-08.03-06.apk"
 }
