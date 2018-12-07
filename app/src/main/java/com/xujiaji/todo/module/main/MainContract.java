@@ -50,6 +50,7 @@ public class MainContract {
         void hideChooseTodoCategory();
         void showDeleteTip(int position, TodoTypeBean.TodoListBean.TodoBean todoBean);
         void showLongClickDialog(android.view.View clickView, final int position, final TodoTypeBean.TodoListBean.TodoBean todoBean);
+        void guideLogin();
     }
 
     interface Presenter extends XContract.Presenter {

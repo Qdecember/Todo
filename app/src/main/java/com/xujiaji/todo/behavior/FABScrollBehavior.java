@@ -6,9 +6,11 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 
 /**
@@ -17,6 +19,8 @@ import android.view.animation.AccelerateInterpolator;
  * description:
  */
 public class FABScrollBehavior extends FloatingActionButton.Behavior {
+    private RecyclerView recyclerView;
+
     public FABScrollBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -43,6 +47,20 @@ public class FABScrollBehavior extends FloatingActionButton.Behavior {
         super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type);
 //        Log.e("onNestedPreScroll", "dy = " + dy);
 //        child.setTranslationY(Math.max(0.0f, Math.min(child.getHeight() * 2, child.getTranslationY() + dy)));
+        if (recyclerView == null) {
+            ViewGroup viewGroup = (ViewGroup) target;
+            if (viewGroup.getChildCount() == 0) {
+                throw new RuntimeException();
+            }
+            View view = viewGroup.getChildAt(0);
+            if (!(view instanceof RecyclerView)) {
+                throw new RuntimeException();
+            }
+            recyclerView = (RecyclerView) view;
+        }
+
+        if (recyclerView.getAdapter().getItemCount() < 12) return;
+
         if (dy > 0) { // down
             if (hide) return;
             hideFab(child);

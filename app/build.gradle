@@ -13,8 +13,8 @@ android {
         applicationId "com.xujiaji.todo"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 15
-        versionName "1.1.0"
+        versionCode 16
+        versionName "1.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "String",           "BASE_URL", "$baseUrl"
         buildConfigField "String",       "LICENSES_URL", "$licensesUrl"

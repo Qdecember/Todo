@@ -18,4 +18,11 @@ public class BubbleCreator {
         bl.setShadowColor(ContextCompat.getColor(activity, R.color.colorAccent));
         return bl;
     }
+
+    public static BubbleLayout getAmber(Activity activity) {
+        BubbleLayout bl = new BubbleLayout(activity);
+        bl.setBubbleColor(ContextCompat.getColor(activity, R.color.amber_800));
+        bl.setShadowColor(ContextCompat.getColor(activity, R.color.overlay_dark_80));
+        return bl;
+    }
 }

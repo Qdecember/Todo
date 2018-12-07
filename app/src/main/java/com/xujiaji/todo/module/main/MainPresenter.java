@@ -15,6 +15,7 @@ import com.xujiaji.todo.helper.ToastHelper;
 import com.xujiaji.todo.repository.bean.Result;
 import com.xujiaji.todo.repository.bean.TodoTypeBean;
 import com.xujiaji.todo.repository.remote.DataCallbackImp;
+import com.xujiaji.todo.repository.remote.Net;
 import com.xujiaji.todo.util.FileUtil;
 import com.xujiaji.todo.util.UpdateAppHttpUtil;
 
@@ -43,6 +44,14 @@ public class MainPresenter extends BasePresenter<MainContract.View,MainModel> im
                     Collections.sort(todoListBean.getTodoList());
                 }
                 view.displayList(bean.getData());
+            }
+
+            @Override
+            public void fail(int code, String msg) {
+                super.fail(code, msg);
+                if (code == Net.NO_LOGIN) {
+                    view.guideLogin();
+                }
             }
         });
     }

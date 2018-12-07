@@ -45,13 +45,18 @@ public class Net {
      */
     public static final int NO = 0;
 
+    /**
+     * 未登录
+     */
+    public static final int NO_LOGIN = -1001;
+
     public static final String SAVE_USER_LOGIN_KEY = "user/login";
     public static final String SAVE_USER_REGISTER_KEY = "user/register";
     public static final String SET_COOKIE_KEY = "set-cookie";
     public static final String COOKIE_NAME = "Cookie";
 
     public static final int TIME_OUT_READ = 20;
-    public static final int TIME_OUT_CONNECT = 5;
+    public static final int TIME_OUT_CONNECT = 20;
 
     private static Net mInstance;
 

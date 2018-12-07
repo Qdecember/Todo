@@ -1,5 +1,6 @@
 package com.xujiaji.todo.module.login;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -23,6 +24,8 @@ import com.xujiaji.todo.helper.ToastHelper;
  */
 public class LoginDialogActivity extends BaseActivity<LoginPresenter> implements LoginContract.View {
 
+    public static final int ACTIVITY_REQUEST_CODE = 222;
+
     private Button mBtnSwitch;
     private Button mBtnConfirm;
     private EditText mEtAccount;
@@ -42,8 +45,8 @@ public class LoginDialogActivity extends BaseActivity<LoginPresenter> implements
         return R.layout.dialog_activity_login;
     }
 
-    public static void launch(Context context) {
-        context.startActivity(new Intent(context, LoginDialogActivity.class));
+    public static void launch(Activity context) {
+        context.startActivityForResult(new Intent(context, LoginDialogActivity.class), ACTIVITY_REQUEST_CODE);
     }
 
     @Override
@@ -111,6 +114,7 @@ public class LoginDialogActivity extends BaseActivity<LoginPresenter> implements
     @Override
     public void loginSuccess() {
         ToastHelper.success(getString(R.string.success_login));
+        setResult(RESULT_OK);
         finish();
     }
 

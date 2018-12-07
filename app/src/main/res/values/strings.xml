@@ -50,4 +50,6 @@
     <string name="delete">删除</string>
     <string name="modify">修改</string>
     <string name="success_edit">修改成功</string>
+    <string name="click_this_can_login">点这里可登陆哦～</string>
+    <string name="long_click_can_edit_or_delete">长按，能：删除或编辑哦～</string>
 </resources>

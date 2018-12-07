@@ -1,7 +1,9 @@
 package com.xujiaji.todo.module.main;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -18,11 +20,14 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.xujiaji.happybubble.BubbleDialog;
+import com.xujiaji.happybubble.Util;
 import com.xujiaji.todo.R;
 import com.xujiaji.todo.base.App;
 import com.xujiaji.todo.base.BaseActivity;
+import com.xujiaji.todo.dialog.OperatingGuideDialog;
 import com.xujiaji.todo.helper.BubbleCreator;
 import com.xujiaji.todo.helper.EmptyViewHelper;
+import com.xujiaji.todo.helper.PrefHelper;
 import com.xujiaji.todo.helper.ToolbarHelper;
 import com.xujiaji.todo.module.about.AboutActivity;
 import com.xujiaji.todo.module.login.LoginDialogActivity;
@@ -193,6 +198,23 @@ public class MainActivity extends  BaseActivity<MainPresenter> implements MainCo
 
         mTodoAdapter.setNewData(src);
         mTodoAdapter.expandAll();
+
+        if (todoTypeBean.getTodoList().size() > 0) {
+            mTodoListView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    int num = PrefHelper.getInt("guide_long_click_num");
+                    if (num > 2) return;
+                    View view = mTodoAdapter.getViewByPosition(mTodoListView, 3, R.id.text);
+                    new OperatingGuideDialog(MainActivity.this)
+                            .setText(getString(R.string.long_click_can_edit_or_delete))
+                            .setClickedView(view)
+                            .setOffsetY(Util.dpToPx(MainActivity.this, -8))
+                            .show();
+                    PrefHelper.set("guide_long_click_num", num + 1);
+                }
+            }, 400L);
+        }
     }
 
     @Override
@@ -306,6 +328,11 @@ public class MainActivity extends  BaseActivity<MainPresenter> implements MainCo
     }
 
     @Override
+    public void guideLogin() {
+        new OperatingGuideDialog(this).setText(getString(R.string.click_this_can_login)).setClickedView(mFab).show();
+    }
+
+    @Override
     public void onRefresh() {
         presenter.requestTodo(mCategory, mRefresh);
     }
@@ -341,5 +368,14 @@ public class MainActivity extends  BaseActivity<MainPresenter> implements MainCo
             return;
         }
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LoginDialogActivity.ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            mRefresh.setRefreshing(true);
+            onRefresh();
+        }
     }
 }
