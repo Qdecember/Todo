@@ -97,7 +97,7 @@ public class MainPresenter extends BasePresenter<MainContract.View,MainModel> im
     public void requestDaily() {
         final Gson gson = new Gson();
         final String key = MainModel.dailyFormat.format(new Date());
-        String dailyData = PrefHelper.getString(key);
+        String dailyData = PrefHelper.getString("daily" + key);
         // 如果本地有这天的数据，那么就不必去请求了
         if (TextUtils.isEmpty(dailyData)) {
             model.catDailyList(this, new DataCallbackImp<Result<Map<String, DailyBean>>>() {
@@ -111,7 +111,7 @@ public class MainPresenter extends BasePresenter<MainContract.View,MainModel> im
                             save = true;
                         }
                         if (save) {
-                            PrefHelper.set(k, gson.toJson(map.get(k)));
+                            PrefHelper.set("daily" + k, gson.toJson(map.get(k)));
                         }
 
                         if (db == null) {
