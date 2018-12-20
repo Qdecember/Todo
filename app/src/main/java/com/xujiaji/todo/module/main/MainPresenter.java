@@ -3,7 +3,9 @@ package com.xujiaji.todo.module.main;
 import android.app.Activity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.vector.update_app.UpdateAppBean;
 import com.vector.update_app.UpdateAppManager;
 import com.vector.update_app.UpdateCallback;
@@ -11,7 +13,9 @@ import com.xujiaji.todo.BuildConfig;
 import com.xujiaji.todo.R;
 import com.xujiaji.todo.base.App;
 import com.xujiaji.todo.base.BasePresenter;
+import com.xujiaji.todo.helper.PrefHelper;
 import com.xujiaji.todo.helper.ToastHelper;
+import com.xujiaji.todo.repository.bean.DailyBean;
 import com.xujiaji.todo.repository.bean.Result;
 import com.xujiaji.todo.repository.bean.TodoTypeBean;
 import com.xujiaji.todo.repository.remote.DataCallbackImp;
@@ -22,9 +26,13 @@ import com.xujiaji.todo.util.UpdateAppHttpUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 
 /**
@@ -83,6 +91,43 @@ public class MainPresenter extends BasePresenter<MainContract.View,MainModel> im
                 ToastHelper.success(App.getInstance().getString(R.string.success_delete));
             }
         });
+    }
+
+    @Override
+    public void requestDaily() {
+        final Gson gson = new Gson();
+        final String key = MainModel.dailyFormat.format(new Date());
+        String dailyData = PrefHelper.getString(key);
+        // 如果本地有这天的数据，那么就不必去请求了
+        if (TextUtils.isEmpty(dailyData)) {
+            model.catDailyList(this, new DataCallbackImp<Result<Map<String, DailyBean>>>() {
+                @Override
+                public void success(Result<Map<String, DailyBean>> bean) {
+                    boolean save = false;
+                    Map<String, DailyBean> map = bean.getData();
+                    DailyBean db = map.get(key); // 获取今天的
+                    for (String k: map.keySet()) {
+                        if (key.equals(k)) {
+                            save = true;
+                        }
+                        if (save) {
+                            PrefHelper.set(k, gson.toJson(map.get(k)));
+                        }
+
+                        if (db == null) {
+                            db = map.get(k);
+                        }
+                    }
+
+                    if (db != null) {
+                        view.displayDaily(db);
+                    }
+
+                }
+            });
+        } else {
+            view.displayDaily(gson.fromJson(dailyData, DailyBean.class));
+        }
     }
 
     @Override

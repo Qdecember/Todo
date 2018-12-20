@@ -22,6 +22,11 @@ public class PrefHelper {
      */
     public static final String USER_INFO = "user_info";
 
+    /**
+     * 关闭一句
+     */
+    public static final String CLOSE_ONE_SENTENCE = "closeOneSentence";
+
     private static Context mHostContext;
     private static boolean isFailCreateHostContext;
 

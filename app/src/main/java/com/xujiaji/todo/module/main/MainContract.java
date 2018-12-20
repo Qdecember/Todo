@@ -1,15 +1,18 @@
 package com.xujiaji.todo.module.main;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
 import com.xujiaji.todo.base.PresenterLife;
+import com.xujiaji.todo.repository.bean.DailyBean;
 import com.xujiaji.todo.repository.bean.Result;
 import com.xujiaji.todo.repository.bean.TodoTypeBean;
 import com.xujiaji.todo.repository.remote.DataCallback;
 
 import java.util.List;
+import java.util.Map;
 
 import io.xujiaji.xmvp.contracts.XContract;
 
@@ -51,12 +54,15 @@ public class MainContract {
         void showDeleteTip(int position, TodoTypeBean.TodoListBean.TodoBean todoBean);
         void showLongClickDialog(android.view.View clickView, final int position, final TodoTypeBean.TodoListBean.TodoBean todoBean);
         void guideLogin();
+        void displayDaily(DailyBean dailyBean);
     }
 
     interface Presenter extends XContract.Presenter {
         void requestTodo(int type, SwipeRefreshLayout refreshLayout);
         void requestUpdateTodo(TodoTypeBean.TodoListBean.TodoBean todoBean);
         void requestDelTodo(int id);
+
+        void requestDaily();
 
         void checkAppUpdate(Activity activity);
     }
@@ -65,5 +71,6 @@ public class MainContract {
         void catTodo(int type, PresenterLife presenterLife, DataCallback<Result<TodoTypeBean>> callback);
         void catUpdateTodo(TodoTypeBean.TodoListBean.TodoBean todoBean, PresenterLife presenterLife, DataCallback<Result> callback);
         void catDelTodo(int id, PresenterLife presenterLife, DataCallback<Result> callback);
+        void catDailyList(PresenterLife presenterLife, DataCallback<Result<Map<String, DailyBean>>> callback);
     }
 }

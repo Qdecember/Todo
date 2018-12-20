@@ -17,13 +17,6 @@
 ## 提示
 本软件和[WanAndroid](https://github.com/xujiaji/WanAndroid)软件账号信息本地共享，如果登录一个后，那么另一个无需再次登录！
 
-## 最新更新
-- v1.1.1 登陆后刷新列表；新增登录和长按引导；当条目达到12行右下角按钮才有动效[#1](https://github.com/xujiaji/Todo/issues/1) 
-<div >
-<img  src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/screen/20181208025732.png" width="20%" height="auto">
-<img  src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/screen/20181208025715.png" width="20%" height="auto">
-</div>
-
 ## 截屏
 1、进入软件时，如未登录，会提示未登录状态状态。点击右下角加号即可弹出登录窗口进行登录或注册。
 <div >
@@ -76,6 +69,18 @@
 <img  src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/screen/20181203103902.png" width="33%" height="auto">
 <img  src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/screen/20181203104322.png" width="33%" height="auto">
 <img  src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/screen/20181203104456.png" width="33%" height="auto">
+</div>
+
+## 最新更新
+- v1.1.2 每日一句，点击一句可弹出，可开启可关闭
+<div >
+<img  src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/screen/20181220225623.png" width="20%" height="auto">
+<img  src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/screen/20181220230042.png" width="20%" height="auto">
+</div>
+- v1.1.1 登陆后刷新列表；新增登录和长按引导；当条目达到12行右下角按钮才有动效[#1](https://github.com/xujiaji/Todo/issues/1) 
+<div >
+<img  src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/screen/20181208025732.png" width="20%" height="auto">
+<img  src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/screen/20181208025715.png" width="20%" height="auto">
 </div>
 
 ## 其他

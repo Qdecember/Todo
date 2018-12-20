@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.xujiaji.todo.BuildConfig;
 import com.xujiaji.todo.helper.PrefHelper;
+import com.xujiaji.todo.repository.bean.DailyBean;
 import com.xujiaji.todo.repository.bean.LicenseBean;
 import com.xujiaji.todo.repository.bean.Result;
 import com.xujiaji.todo.repository.bean.TodoTypeBean;
@@ -12,6 +13,7 @@ import com.xujiaji.todo.util.NetUtil;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -161,5 +163,9 @@ public class Net {
 
     public void getLicense(Callback<Result<List<LicenseBean>>> callback) {
         api.getLicenses(BuildConfig.LICENSES_URL).enqueue(callback);
+    }
+
+    public void getDailyList(Callback<Result<Map<String, DailyBean>>> callback) {
+        api.getDailyList(BuildConfig.DAILY_URL).enqueue(callback);
     }
 }

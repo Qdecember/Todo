@@ -2,7 +2,9 @@ package com.xujiaji.todo.module.main;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,10 +15,15 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.xujiaji.happybubble.BubbleDialog;
@@ -32,6 +39,7 @@ import com.xujiaji.todo.helper.ToolbarHelper;
 import com.xujiaji.todo.module.about.AboutActivity;
 import com.xujiaji.todo.module.login.LoginDialogActivity;
 import com.xujiaji.todo.module.post.PostFragment;
+import com.xujiaji.todo.repository.bean.DailyBean;
 import com.xujiaji.todo.repository.bean.TodoTypeBean;
 
 import java.util.ArrayList;
@@ -63,6 +71,9 @@ public class MainActivity extends  BaseActivity<MainPresenter> implements MainCo
     public void onPresenterCircle(MainPresenter presenter) {
         try {
             presenter.checkAppUpdate(this);
+            if (!PrefHelper.getBoolean(PrefHelper.CLOSE_ONE_SENTENCE)) {
+                presenter.requestDaily();
+            }
         } catch (Exception ignored) {}
     }
 
@@ -228,6 +239,7 @@ public class MainActivity extends  BaseActivity<MainPresenter> implements MainCo
                     .setBubbleLayout(BubbleCreator.get(this));
             if (mBubbleDialog.getWindow() != null)
                 mBubbleDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+            mBubbleDialogView.findViewById(R.id.bottomLayout).setVisibility(View.VISIBLE);
             mBubbleDialogView.findViewById(R.id.btnAbout).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -235,7 +247,29 @@ public class MainActivity extends  BaseActivity<MainPresenter> implements MainCo
                     AboutActivity.launch(MainActivity.this);
                 }
             });
-            mBubbleDialogView.findViewById(R.id.btnAbout).setVisibility(View.VISIBLE);
+            mBubbleDialogView.findViewById(R.id.btnOneSentence).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    hideChooseTodoCategory();
+                    presenter.requestDaily();
+                }
+            });
+
+            final CheckBox cbOneSentence = mBubbleDialogView.findViewById(R.id.cbOneSentence);
+            if (PrefHelper.getBoolean(PrefHelper.CLOSE_ONE_SENTENCE)) {
+                cbOneSentence.setChecked(false);
+                cbOneSentence.setText(getString(R.string.close));
+            } else {
+                cbOneSentence.setChecked(true);
+                cbOneSentence.setText(getString(R.string.open));
+            }
+            cbOneSentence.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    PrefHelper.set(PrefHelper.CLOSE_ONE_SENTENCE, !isChecked);
+                    cbOneSentence.setText(isChecked ? getString(R.string.open) : getString(R.string.close));
+                }
+            });
         }
 
         RadioGroup group = mBubbleDialogView.findViewById(R.id.rgGroup);
@@ -330,6 +364,23 @@ public class MainActivity extends  BaseActivity<MainPresenter> implements MainCo
     @Override
     public void guideLogin() {
         new OperatingGuideDialog(this).setText(getString(R.string.click_this_can_login)).setClickedView(mFab).show();
+    }
+
+    @Override
+    public void displayDaily(final DailyBean dailyBean) {
+        Glide.with(this).load(dailyBean.getPicUrl()).into(new SimpleTarget<Drawable>() {
+            @Override
+            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                new DailyDialog.Builder(MainActivity.this)
+                        .content(dailyBean.getContent())
+                        .from(dailyBean.getFrom())
+                        .picUrl(dailyBean.getPicUrl())
+                        .color(dailyBean.getColor())
+                        .size(dailyBean.getSize())
+                        .build()
+                        .show();
+            }
+        });
     }
 
     @Override

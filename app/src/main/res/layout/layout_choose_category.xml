@@ -28,14 +28,47 @@
         android:layout_height="wrap_content"
         android:text="@string/life"/>
 
-    <Button
-        android:id="@+id/btnAbout"
+
+    <LinearLayout
+        android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        style="@style/Base.Widget.AppCompat.ActionButton.CloseMode"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:visibility="gone"
-        android:text="@string/about"
-        android:textColor="@color/colorAccent"/>
+        android:background="@drawable/dotted_line">
+
+        <Button
+            android:id="@+id/btnAbout"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            style="@style/Base.Widget.AppCompat.ActionButton.CloseMode"
+            android:gravity="center"
+            android:text="@string/about"
+            android:textColor="@color/colorAccent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/dotted_line">
+            <Button
+                android:id="@+id/btnOneSentence"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                style="@style/Base.Widget.AppCompat.ActionButton.CloseMode"
+                android:gravity="center"
+                android:text="@string/one_sentence"
+                android:textColor="@color/colorAccent"/>
+
+            <CheckBox
+                android:id="@+id/cbOneSentence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/open"
+                android:checked="true"
+                android:textColor="@color/colorAccent"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RadioGroup>

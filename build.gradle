@@ -32,6 +32,7 @@ ext{
     licensesUrl      = '"https://raw.githubusercontent.com/xujiaji/Todo/master/json/licenses.json"'
     versionUrl       = '"https://raw.githubusercontent.com/xujiaji/Todo/master/json/todo_version.json"'
     downloadQr       = '"https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/download_qr.png"'
+    dailyUrl         = '"https://raw.githubusercontent.com/xujiaji/Todo/master/json/daily/v1.json"'
 
     support          = '28.0.0'
     retrofit         = '2.0.2'

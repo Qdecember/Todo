@@ -50,4 +50,10 @@
         <item name="android:windowEnterAnimation" >@anim/dialog_in</item>
         <item name="android:windowExitAnimation" >@anim/dialog_out</item>
     </style>
+
+    <style name="dialogDailyWindowAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation" >@anim/dialog_daily_in</item>
+        <item name="android:windowExitAnimation" >@anim/dialog_daily_out</item>
+    </style>
+
 </resources>

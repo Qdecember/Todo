@@ -1,11 +1,13 @@
 package com.xujiaji.todo.repository.remote;
 
+import com.xujiaji.todo.repository.bean.DailyBean;
 import com.xujiaji.todo.repository.bean.LicenseBean;
 import com.xujiaji.todo.repository.bean.Result;
 import com.xujiaji.todo.repository.bean.TodoTypeBean;
 import com.xujiaji.todo.repository.bean.UserBean;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -77,4 +79,10 @@ public interface API {
      */
     @GET
     Call<Result<List<LicenseBean>>> getLicenses(@Url String url);
+
+    /**
+     * 获取每日
+     */
+    @GET
+    Call<Result<Map<String, DailyBean>>> getDailyList(@Url String url);
 }
