@@ -1,5 +1,7 @@
 package com.xujiaji.todo.repository.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 public class DailyBean {
     /**
      * picUrl : https://cdn.pixabay.com/photo/2017/05/08/13/15/spring-bird-2295431__480.jpg
@@ -8,10 +10,15 @@ public class DailyBean {
      * size : 14
      */
 
+    @SerializedName("picUrl")
     private String picUrl;
+    @SerializedName("content")
     private String content;
+    @SerializedName("color")
     private String color;
+    @SerializedName("size")
     private int size;
+    @SerializedName("from")
     private String from;
 
     public String getPicUrl() {
