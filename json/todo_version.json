@@ -1,8 +1,8 @@
 {
-    "version_name":"v1.1.2",
-    "version_code":17,
+    "version_name":"v1.1.2.1",
+    "version_code":18,
     "update_info":"1. 新增每日一句\n2. 每日一句可在顶部菜单关闭\n3. 每日一句可通过顶部菜单再次打开",
     "file_size":"3M",
     "constraint":false,
-    "apk_url":"https://github.com/xujiaji/Todo/releases/download/v1.1.2/wantodo_v1.1.2_2018-12-20.23-09.apk"
+    "apk_url":"https://github.com/xujiaji/Todo/releases/download/v1.1.2.1/wantodo_v1.1.2.1_2018-12-21.00-37.apk"
 }
