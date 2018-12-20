@@ -77,6 +77,7 @@
 <img  src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/screen/20181220225623.png" width="20%" height="auto">
 <img  src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/screen/20181220230042.png" width="20%" height="auto">
 </div>
+
 - v1.1.1 登陆后刷新列表；新增登录和长按引导；当条目达到12行右下角按钮才有动效[#1](https://github.com/xujiaji/Todo/issues/1) 
 <div >
 <img  src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/screen/20181208025732.png" width="20%" height="auto">
