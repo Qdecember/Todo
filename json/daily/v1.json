@@ -22,6 +22,20 @@
             "color":"#FF312E63",
             "size":14,
             "from":"——王花花"
+        },
+        "20181222":{
+            "picUrl":"https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/sentence/20181221115627.jpg",
+            "content":"到处都有痛苦。\n而，比痛苦更为持久且尖利伤人的是，\n到处都有抱有期望的等待。",
+            "color":"#FFC2281D",
+            "size":16,
+            "from":"《我们在此相遇》"
+        },
+        "20181223":{
+            "picUrl":"https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/sentence/20181221120030.jpg",
+            "content":"要不是痛侧心扉，谁又记得谁，\n只是云和月，相互以为是彼此的盈缺。",
+            "color":"#FF000000",
+            "size":14,
+            "from":"《曾经最美》"
         }
     }
 }
