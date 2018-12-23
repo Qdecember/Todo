@@ -36,6 +36,34 @@
             "color":"#FF000000",
             "size":14,
             "from":"《曾经最美》"
+        },
+        "20181224":{
+            "picUrl":"https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/sentence/20181223174651.png",
+            "content":"长的是磨难，短的是人生。",
+            "color":"#FFFFFFFF",
+            "size":14,
+            "from":"张爱玲"
+        },
+        "20181225":{
+            "picUrl":"https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/sentence/20181223175705.jpg",
+            "content":"爱情像鲜花，它总不开放，\n欲能像野草，疯狂地生长。",
+            "color":"#FFFF7A59",
+            "size":14,
+            "from":"许巍《在别处》"
+        },
+        "20181226":{
+            "picUrl":"https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/sentence/20181223180039.jpg",
+            "content":"时间从来不回答，生命从来不喧哗。",
+            "color":"#FF5DFF40",
+            "size":14,
+            "from":"吴青峰"
+        },
+        "20181227":{
+            "picUrl":"https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/sentence/20181223180459.jpg",
+            "content":"我在人生道路上迷失了方向。",
+            "color":"#FFFFFFFF",
+            "size":14,
+            "from":"《火隐忍者》"
         }
     }
 }
