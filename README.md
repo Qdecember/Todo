@@ -11,9 +11,7 @@
 [<img src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/github/github_download.png"
       alt="github下载"
       height="80">](https://github.com/xujiaji/Todo/releases) 
-[<img src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/github/fir_download.png"
-      alt="fir下载"
-      height="80">](https://fir.im/wantodo) 
+
 ## 提示
 本软件和[WanAndroid](https://github.com/xujiaji/WanAndroid)软件账号信息本地共享，如果登录一个后，那么另一个无需再次登录！
 
