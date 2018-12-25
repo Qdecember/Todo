@@ -20,6 +20,7 @@ public class LoginModel implements LoginContract.Model {
     @Override
     public void catLogin(String account, String password, PresenterLife presenterLife, DataCallback<Result<UserBean>> callback) {
         if (!isPassInput(account, password)) {
+            callback.finished();
             return;
         }
 
@@ -29,6 +30,7 @@ public class LoginModel implements LoginContract.Model {
     @Override
     public void catRegister(String account, String password, PresenterLife presenterLife, DataCallback<Result<UserBean>> callback) {
         if (!isPassInput(account, password)) {
+            callback.finished();
             return;
         }
         Net.getInstance().postRegister(account, password, CallbackHandler.getCallback(presenterLife, callback));
