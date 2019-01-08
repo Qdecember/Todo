@@ -70,6 +70,7 @@
 </div>
 
 ## 最新更新
+- v1.1.3 每日一句添加版本更新，链接地址动态
 - v1.1.2 每日一句，点击一句可弹出，可开启可关闭
 <div >
 <img  src="https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/screen/20181220225623.png" width="20%" height="auto">
