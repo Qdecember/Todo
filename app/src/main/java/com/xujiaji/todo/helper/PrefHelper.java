@@ -7,9 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-
 import com.xujiaji.todo.base.App;
-import com.xujiaji.todo.repository.remote.Net;
 
 import java.util.Map;
 
@@ -26,6 +24,12 @@ public class PrefHelper {
      * 关闭一句
      */
     public static final String CLOSE_ONE_SENTENCE = "closeOneSentence";
+
+    public static final String DAILY_URL_KEY = "daily_url";
+
+    public static final String DAILY_CODE_KEY = "daily_code";
+
+    public static final String DAILY_DATA = "daily_json_data";
 
     private static Context mHostContext;
     private static boolean isFailCreateHostContext;

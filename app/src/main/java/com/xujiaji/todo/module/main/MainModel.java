@@ -39,7 +39,7 @@ public class MainModel implements MainContract.Model {
     }
 
     @Override
-    public void catDailyList(PresenterLife presenterLife, DataCallback<Result<Map<String, DailyBean>>> callback) {
-        Net.getInstance().getDailyList(CallbackHandler.getCallback(presenterLife, callback));
+    public void catDailyList(String dailyUrl, PresenterLife presenterLife, DataCallback<Result<Map<String, DailyBean>>> callback) {
+        Net.getInstance().getDailyList(dailyUrl, CallbackHandler.getCallback(presenterLife, callback));
     }
 }

@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.vector.update_app.UpdateAppBean;
 import com.vector.update_app.UpdateAppManager;
 import com.vector.update_app.UpdateCallback;
@@ -26,13 +27,12 @@ import com.xujiaji.todo.util.UpdateAppHttpUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 
 /**
@@ -95,39 +95,49 @@ public class MainPresenter extends BasePresenter<MainContract.View,MainModel> im
 
     @Override
     public void requestDaily() {
+        final String dailyUrl = PrefHelper.getString(PrefHelper.DAILY_URL_KEY);
+        if (TextUtils.isEmpty(dailyUrl)) {
+            PrefHelper.set(PrefHelper.DAILY_CODE_KEY, 0);
+            return;
+        }
         final Gson gson = new Gson();
         final String key = MainModel.dailyFormat.format(new Date());
-        String dailyData = PrefHelper.getString("daily" + key);
-        // 如果本地有这天的数据，那么就不必去请求了
-        if (TextUtils.isEmpty(dailyData)) {
-            model.catDailyList(this, new DataCallbackImp<Result<Map<String, DailyBean>>>() {
-                @Override
-                public void success(Result<Map<String, DailyBean>> bean) {
-                    boolean save = false;
-                    Map<String, DailyBean> map = bean.getData();
-                    DailyBean db = map.get(key); // 获取今天的
-                    for (String k: map.keySet()) {
-                        if (key.equals(k)) {
-                            save = true;
-                        }
-                        if (save) {
-                            PrefHelper.set("daily" + k, gson.toJson(map.get(k)));
-                        }
-
-                        if (db == null) {
-                            db = map.get(k);
-                        }
-                    }
-
-                    if (db != null) {
-                        view.displayDaily(db);
-                    }
-
+        String dailyJsonData = PrefHelper.getString(PrefHelper.DAILY_DATA);
+        if (!TextUtils.isEmpty(dailyJsonData)) {
+            Map<String, DailyBean> map = gson.fromJson(dailyJsonData, new TypeToken<Map<String, DailyBean>>(){}.getType());
+            if (map != null) {
+                DailyBean dailyBean = map.get(key);
+                if (dailyBean != null) {
+                    view.displayDaily(dailyBean);
+                    return;
                 }
-            });
-        } else {
-            view.displayDaily(gson.fromJson(dailyData, DailyBean.class));
+            }
         }
+        // 如果本地有这天的数据，那么就去请求了
+        model.catDailyList(dailyUrl, this, new DataCallbackImp<Result<Map<String, DailyBean>>>() {
+            @Override
+            public void success(Result<Map<String, DailyBean>> bean) {
+                PrefHelper.set(PrefHelper.DAILY_DATA, gson.toJson(bean.getData()));
+                Map<String, DailyBean> map = bean.getData();
+                DailyBean db = map.get(key); // 获取今天的
+                if (db != null) {
+                    view.displayDaily(db);
+                }
+                else {
+                    Random random = new Random();
+                    int index = random.nextInt(map.size());
+                    int num = 0;
+                    for (String key: map.keySet()) {
+                        if (index == num ++) {
+                            view.displayDaily(map.get(key));
+                            return;
+                        }
+                    }
+                }
+
+            }
+        });
+
     }
 
     @Override
@@ -157,6 +167,16 @@ public class MainPresenter extends BasePresenter<MainContract.View,MainModel> im
                         UpdateAppBean updateAppBean = new UpdateAppBean();
                         try {
                             JSONObject jsonObject = new JSONObject(json);
+
+                            // 配置每日一句请求链接
+                            final int nowDailyVersionCode = jsonObject.getInt("daily_version_code");
+                            if (PrefHelper.getInt(PrefHelper.DAILY_CODE_KEY) < nowDailyVersionCode) { // 如果数据版本有变化，则修改数据
+                                final String dailyUrl = jsonObject.getString("daily_url");
+                                PrefHelper.set(PrefHelper.DAILY_CODE_KEY, nowDailyVersionCode);
+                                PrefHelper.set(PrefHelper.DAILY_URL_KEY, dailyUrl);
+                                PrefHelper.set(PrefHelper.DAILY_DATA, "");
+                            }
+
                             updateAppBean
                                     //（必须）是否更新Yes,No
                                     .setUpdate(jsonObject.optInt("version_code") > BuildConfig.VERSION_CODE ? "Yes" : "No")

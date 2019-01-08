@@ -51,7 +51,8 @@
                 android:gravity="end"
                 android:text="@string/test_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="@android:color/white"
+                android:textColor="#1A237E"
+                android:textSize="14sp"
                 app:fontFamily="sans-serif-medium" />
 
             <TextView

@@ -165,7 +165,7 @@ public class Net {
         api.getLicenses(BuildConfig.LICENSES_URL).enqueue(callback);
     }
 
-    public void getDailyList(Callback<Result<Map<String, DailyBean>>> callback) {
-        api.getDailyList(BuildConfig.DAILY_URL).enqueue(callback);
+    public void getDailyList(String dailyUrl, Callback<Result<Map<String, DailyBean>>> callback) {
+        api.getDailyList(dailyUrl).enqueue(callback);
     }
 }

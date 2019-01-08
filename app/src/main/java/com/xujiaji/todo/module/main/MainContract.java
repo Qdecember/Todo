@@ -71,6 +71,6 @@ public class MainContract {
         void catTodo(int type, PresenterLife presenterLife, DataCallback<Result<TodoTypeBean>> callback);
         void catUpdateTodo(TodoTypeBean.TodoListBean.TodoBean todoBean, PresenterLife presenterLife, DataCallback<Result> callback);
         void catDelTodo(int id, PresenterLife presenterLife, DataCallback<Result> callback);
-        void catDailyList(PresenterLife presenterLife, DataCallback<Result<Map<String, DailyBean>>> callback);
+        void catDailyList(String dailyUrl, PresenterLife presenterLife, DataCallback<Result<Map<String, DailyBean>>> callback);
     }
 }
