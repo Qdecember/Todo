@@ -101,25 +101,25 @@ public class MainPresenter extends BasePresenter<MainContract.View,MainModel> im
             return;
         }
         final Gson gson = new Gson();
-        final String key = MainModel.dailyFormat.format(new Date());
+        final String keyToday = MainModel.dailyFormat.format(new Date());
         String dailyJsonData = PrefHelper.getString(PrefHelper.DAILY_DATA);
         if (!TextUtils.isEmpty(dailyJsonData)) {
             Map<String, DailyBean> map = gson.fromJson(dailyJsonData, new TypeToken<Map<String, DailyBean>>(){}.getType());
             if (map != null) {
-                DailyBean dailyBean = map.get(key);
+                DailyBean dailyBean = map.get(keyToday);
                 if (dailyBean != null) {
                     view.displayDaily(dailyBean);
                     return;
                 }
             }
         }
-        // 如果本地有这天的数据，那么就去请求了
+        // 如果本地没有这天的数据，那么就去请求了
         model.catDailyList(dailyUrl, this, new DataCallbackImp<Result<Map<String, DailyBean>>>() {
             @Override
             public void success(Result<Map<String, DailyBean>> bean) {
-                PrefHelper.set(PrefHelper.DAILY_DATA, gson.toJson(bean.getData()));
+
                 Map<String, DailyBean> map = bean.getData();
-                DailyBean db = map.get(key); // 获取今天的
+                DailyBean db = map.get(keyToday); // 获取今天的
                 if (db != null) {
                     view.displayDaily(db);
                 }
@@ -128,13 +128,17 @@ public class MainPresenter extends BasePresenter<MainContract.View,MainModel> im
                     int index = random.nextInt(map.size());
                     int num = 0;
                     for (String key: map.keySet()) {
-                        if (index == num ++) {
-                            view.displayDaily(map.get(key));
-                            return;
+                        if (index == num ++ && map.get(key) != null) {
+                            final DailyBean value = map.get(key);
+                            view.displayDaily(value);
+                            if (value != null)
+                                map.put(keyToday, value);
+                            break;
                         }
                     }
                 }
 
+                PrefHelper.set(PrefHelper.DAILY_DATA, gson.toJson(map));
             }
         });
 

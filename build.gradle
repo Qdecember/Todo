@@ -27,7 +27,7 @@ task clean(type: Delete) {
 }
 
 ext{
-    baseUrl          = '"http://www.wanandroid.com/"'
+    baseUrl          = '"https://www.wanandroid.com/"'
     licensesUrl      = '"https://raw.githubusercontent.com/xujiaji/Todo/master/json/licenses.json"'
     versionUrl       = '"https://raw.githubusercontent.com/xujiaji/Todo/master/json/todo_version.json"'
     downloadQr       = '"https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/todo/download_qr.png"'
